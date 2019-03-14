@@ -4,7 +4,8 @@ A robotic harvesting platform that automates detection and retrieval of matured 
 ## Sensing Rig 
 Maturity detection is done using a Mask RCNN pretrained on COCO weights where the class identified is the local lettuce. When ready to harvest, the actuation rig will harvest accordingly.
 
-### Neural Network 
+### Neural Network
+
 #### RPI on Robot
 ##### Publish topics to server:
 For raw image data: 
@@ -13,7 +14,8 @@ vfarm/tier01/rack02
 vfarm/tier02/rack01
 vfarm/tier02/rack02
 ##### Publish topics to rack servo:
-11 12 21 22
+11/n
+12 21 22
 ##### Subscribe topics from server for harvest commands:
 vfarm/harvest
 ##### Subscribe topics from rack servo as confirmation of open racks:
