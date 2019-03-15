@@ -8,10 +8,10 @@ Maturity detection is done using a Mask RCNN pretrained on COCO weights where th
 
 #### RPI on Robot
 ##### Publish topics to server (for raw image data):
-vfarm/tier01/rack01, 
-vfarm/tier01/rack02, 
-vfarm/tier02/rack01,
-vfarm/tier02/rack02
+vfarm/tier01_tray01, 
+vfarm/tier01_tray02, 
+vfarm/tier02_tray01,
+vfarm/tier02_tray02
 ##### Publish topics to rack servo:
 11, 12, 21, 22
 ##### Subscribe topics from server (for harvest commands):
