@@ -1,20 +1,20 @@
 #RPI on Robot
-##Publish topics to server:
+##PUBLISH topics to server:
 For raw image data: 
-vfarm/tier01/rack01
-vfarm/tier01/rack02
-vfarm/tier02/rack01
-vfarm/tier02/rack02
-##Publish topics to rack servo:
+vfarm/11
+vfarm/12
+vfarm/21
+vfarm/22
+##PUBLISH topics to rack servo:
 11 12 21 22
-##Subscribe topics from server for harvest commands:
+##SUBSCRIBE topics from server for harvest commands:
 vfarm/harvest
-##Subscribe topics from rack servo as confirmation of open racks:
+##SUBSCRIBE topics from rack servo as confirmation of open racks:
 111 121 211 221
 
 
 #Rack Servo
-##Subscribe topics from RPI Robot:
+##SUBSCRIBE topics from RPI Robot:
 11 12 21 22
-##Publish topics to RPI Robot when gate open:
+##PUBLISH topics to RPI Robot when gate open:
 111 121 211 221
