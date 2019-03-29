@@ -52,6 +52,9 @@ rack : 10.12.213.188
 --edit 
 sudo leafpad /home/pi/.homeassistant/configuration.yaml
 
+## UI Link
+10.12.108.241:8123
+
 ### Currently running files
 ## Rack
  - Packages/ 
