@@ -52,4 +52,19 @@ rack : 10.12.213.188
 --edit 
 sudo leafpad /home/pi/.homeassistant/configuration.yaml
 
+### Currently running files
+## Rack
+ - Packages/ 
+  1. Classes.py
+  2. __init__.py
+  3. main.py
+  - Arduino
+   1. slider_arduino4.ino
+## Robot
+1. Robotcam.py
+2. receiver_arduino2.ino
 
+## Backend
+1. fakebackend.py
+2. configuration.yaml
+3. groups.yaml
