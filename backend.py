@@ -91,10 +91,10 @@ class LettuceInferenceConfig(LettuceConfig):
 #the data points in the harvest_log csv file will be used for reinforcement learning     
 rack_status = {}
 
-switch_status = {"switch_tier01_rack01": "",
-                 "switch_tier01_rack02": "",
-                 "switch_tier02_rack01": "",
-                 "switch_tier02_rack02": ""
+switch_status = {"switch_tier01_tray01": "",
+                 "switch_tier01_tray02": "",
+                 "switch_tier02_tray01": "",
+                 "switch_tier02_tray02": ""
                  }
 
 """ ################################### DEFINE FUNCTIONS AND CALLBACKS BELOW ###########################################
@@ -152,9 +152,9 @@ def process_raw_images():
         else model.find_last()
     model.load_weights(weights, by_name=True)
     
-    class_names = ["BG", "Lettuce"]
+    #class_names = ["BG", "Lettuce"]
     
-    colors = visualize.random_colors(len(class_names))
+    #colors = visualize.random_colors(len(class_names))
 
     raw_folderpath = 'vfarm' 
     
@@ -188,20 +188,35 @@ def process_raw_images():
             	# convert the image back to BGR so we can use OpenCV's drawing function
                 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
                 
-                output = visualize.display_instances(img, r['rois'], r['masks'], r['class_ids'], 
-                                                     class_names, r['scores'], colors=colors)
+                # loop over the predicted scores and class labels
+                for i in range(0, len(r["scores"])):
+		        # extract the bounding box information, class ID, label,
+                # and predicted probability from the results
+                    (startY, startX, endY, end) = r["rois"][i]
+                    classID = r["class_ids"][i]
+                    label = CLASS_NAMES[classID]
+                    score = r["scores"][i]
+
+            		# draw the class label and score on the image
+                    text = "{}: {:.4f}".format(label, score)
+                    y = startY - 10 if startY - 10 > 10 else startY + 10
+                    cv2.putText(img, text, (startX, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                
+                #output = visualize.display_instances(img, r['rois'], r['masks'], r['class_ids'], 
+                #                                     class_names, r['scores'], colors=colors)
                 
                 # resize the image so it more easily fits on our screen
-                output = imutils.resize(output, width=512)
+                output = imutils.resize(img, width=512)
                 
                 #save the processed image to the vfarm folder
                 cv2.imwrite(str(processed_folderpath)+"/"+str(infile), output)
             
                 #if there are bounding boxes detected
                 if len(r["rois"].shape[0]) > 0:
-                    rack_status.update({str(infile): "Y"})
+                    rack_status.update({str(infile): "1"})
                 else:
-                    rack_status.update({str(infile): "N"})
+                    rack_status.update({str(infile): "0"})
                 
                 writer.writerow({'Date': str(time.strftime("%H:%M:%S")),
                                  'Time': str(time.strftime("%d/%m/%Y")),
@@ -209,8 +224,14 @@ def process_raw_images():
                                  'Machine Validation': str(rack_status[str(infile)])})
 
     print(rack_status)
-    
-                
+    #eg.
+    #rack_status = {"11": "1",
+    #               "12": "0",
+    #               "21": "1",
+    #               "22": "0"
+    #               }
+
+
 #the callback for when a PUBLISH message is received from the server
 #if payload received matches, execute another command/script
 def on_message(client, userdata, msg):
@@ -246,8 +267,9 @@ def on_message(client, userdata, msg):
     #PUBLISH to topic: vfarm/motors to push motor commands  
     #on the configuration.yaml file, the corresponding topic is under state_topic
     
-    client.publish("vfarm/motors", str(rack_status), qos=0, retain=False)
-    
+
+    client.publish("vfarm/harvest", str(rack_status), qos=0, retain=False)
+        
     rack_status.clear()
     
     with open('harvest_log.csv', mode= 'a') as csv_file:
@@ -302,16 +324,16 @@ if __name__ == "__main__":
     #subscribe and listen to the specific MQTT topic
     #allows multiple topic subscriptions in a single subscription command
     #on the configuration.yaml file, the corresponding topic for the switch is under command_topic....... to receive image data
-    client.subscribe("vfarm/tier01_rack01", 0)
-    client.subscribe("vfarm/tier01_rack02", 0)
-    client.subscribe("vfarm/tier02_rack01", 0)
-    client.subscribe("vfarm/tier02_rack02", 0)
+    client.subscribe("vfarm/11", 0)
+    client.subscribe("vfarm/12", 0)
+    client.subscribe("vfarm/21", 0)
+    client.subscribe("vfarm/22", 0)
     
     ################################# CLIENT SUBSCRIBES TO CORRESPONDING TOPIC FOR USER VALIDATION ON HARVEST ############################
-    client.subscribe("vfarm/switch_tier01_rack01", 0)
-    client.subscribe("vfarm/switch_tier01_rack02", 0)
-    client.subscribe("vfarm/switch_tier02_rack01", 0)
-    client.subscribe("vfarm/switch_tier02_rack02", 0)
+    client.subscribe("vfarm/switch_tier01_tray01", 0)
+    client.subscribe("vfarm/switch_tier01_tray02", 0)
+    client.subscribe("vfarm/switch_tier02_tray01", 0)
+    client.subscribe("vfarm/switch_tier02_tray02", 0)
     
     #the blocking call that processes network traffic, dispatches callbacks and handles automatic reconnecting
     client.loop_forever()  
