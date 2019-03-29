@@ -28,5 +28,28 @@ vfarm/harvest
 ### CSV File Output 
 Realtime logging of date, time, exact rack and column of the harvest is done with machine validation vs user validation done to better reinforce learning
 
-
+### Passwords
+mqtt server : username : pgharvest
+              password : 1234
+homeassistant(ui) : username  : project green harvest
+                    password : 12345
+                   
 ## Actuation rig
+
+## IP Adresses 
+backend(hass/mqtt broker) : 10.12.108.241
+robot : 10.12.218.81
+rack : 10.12.213.188
+
+### backend steps
+## run mqtt broker 
+1. sudo /etc/init.d/mosquitto start stop
+
+## run hass ui
+1. cd homeassistant/
+2. source bin/activate
+3. hass
+--edit 
+sudo leafpad /home/pi/.homeassistant/configuration.yaml
+
+
