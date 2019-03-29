@@ -66,8 +66,11 @@ sudo leafpad /home/pi/.homeassistant/configuration.yaml
 ## Robot
 1. Robotcam.py
 2. receiver_arduino2.ino
+3. motor_linefollower.ino
+4. actuator.ino
 
 ## Backend
 1. fakebackend.py
 2. configuration.yaml
 3. groups.yaml
+4. backend.py
