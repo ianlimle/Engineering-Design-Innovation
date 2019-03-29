@@ -1,0 +1,27 @@
+Tier1Tray1_group:
+  name: Tier1Tray1
+  control: hidden
+  entities:
+   - camera.tier1tray1
+   - switch.harvest
+
+Tier1Tray2_group:
+  name: Tier1Tray2
+  control: hidden
+  entities:
+   - camera.tier1tray2
+   - switch.harvest_2
+
+Tier2Tray1_group:
+  name: Tier2Tray1
+  control: hidden
+  entities:
+   - camera.tier2tray1
+   - switch.harvest_3
+
+Tier2Tray2_group:
+  name: Tier2Tray2
+  control: hidden
+  entities:
+   - camera.tier2tray2
+   - switch.harvest_4
