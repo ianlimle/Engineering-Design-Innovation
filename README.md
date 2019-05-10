@@ -1,4 +1,4 @@
-# Engineering Design Innovation
+# Project Green Harvest
 Automation and connectivity are facets of the Industry 4.0 digital transformation wave that Singapore is currently riding on. With such a backdrop, we hope to harness these elements in the state of the art design of a harvesting suite that assists in the detection and retrieval of matured crops in multi-tiered, vertical urban farming applications.
 The suite consists of 3 key products coordinated via Internet of Things (IoT) protocols with cloud compute support: 
 ## (i) Harvesting Robot
