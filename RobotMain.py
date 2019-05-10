@@ -5,14 +5,14 @@ Created on Sat Mar 30 16:09:40 2019
 @author: Ian
 """
 
-import Classes
+import RobotClasses
 from threading import Thread
 
-rack = Classes.RobotHarvest()
-mqtt = Classes.MQTTClient()
+robot = RobotClasses.RobotHarvest()
+mqtt = RobotClasses.MQTTClient()
 
 threadA = Thread(target = mqtt.client.loop_start())
-threadB = Thread(target = rack.listen_to_robotrpi())
+threadB = Thread(target = robot.listen_for_startbutton())
     
 threadA.run()
 threadB.run()
