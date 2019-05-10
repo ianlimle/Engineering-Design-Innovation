@@ -1,14 +1,13 @@
-# 30.007 Engineering Design Innovation
 Automation and connectivity are facets of the Industry 4.0 digital transformation wave that Singapore is currently riding on. With such a backdrop, we hope to harness these elements in the state of the art design of a harvesting suite that assists in the detection and retrieval of matured crops in multi-tiered, vertical urban farming applications.
 The suite consists of 3 key products coordinated via Internet of Things (IoT) protocols with cloud compute support: 
-(i) Harvesting Robot
+# (i) Harvesting Robot
 - autonomous line following navigation
 - actuating rig for collection and storage of crops 
 - AI-enabled maturity detection algorithm
-(ii) Smart Rack
+# (ii) Smart Rack
 - automated gantry system
 - crop tray release control
-(iii) Backend Monitoring System
+# (iii) Backend Monitoring System
 - robot control
 - crops monitoring
 The IoT Hub enables seamless M2M communication with all 3 features above. We have also introduced cloud compute support for our computationally-intensive image processing tasks and data management. 
