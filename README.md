@@ -1,11 +1,29 @@
 # 30.007 Engineering Design Innovation
-A robotic harvesting platform that automates detection and retrieval of matured crops in multi-tiered, vertical urban farms
+Automation and connectivity are facets of the Industry 4.0 digital transformation wave that Singapore is currently riding on. With such a backdrop, we hope to harness these elements in the state of the art design of a harvesting suite that assists in the detection and retrieval of matured crops in multi-tiered, vertical urban farming applications.
+The suite consists of 3 key products coordinated via Internet of Things (IoT) protocols with cloud compute support: 
+(i) Harvesting Robot
+- autonomous line following navigation
+- actuating rig for collection and storage of crops 
+- AI-enabled maturity detection algorithm
+(ii) Smart Rack
+- automated gantry system
+- crop tray release control
+(iii) Backend Monitoring System
+- robot control
+- crops monitoring
+The IoT Hub enables seamless M2M communication with all 3 features above. We have also introduced cloud compute support for our computationally-intensive image processing tasks and data management. 
+
+## Prototype Demonstration
+https://drive.google.com/file/d/1LujWQCsxBQwcrA1VPjlDe_eGRbtkrgQI/view?usp=sharing
+## Research Paper
+https://drive.google.com/file/d/1NqBNRuVo23LaoQi9IoCKfTkO-04ID2F2/view?usp=sharing
+## Poster 
+https://drive.google.com/file/d/1BBwjKtgxrbAKLz1QMeWBqWVxtac-kL0W/view?usp=sharing
 
 ## Sensing Rig 
-Maturity detection is done using a Mask RCNN pretrained on COCO weights where the class identified is the local lettuce. When ready to harvest, the actuation rig will harvest accordingly.
+Maturity detection is done using a Mask RCNN pretrained on COCO weights. Two classes of lettuce crops are output- either 'Adult' or 'Seedling'. When ready to harvest, the actuation rig will harvest accordingly.
 
 ### Neural Network
-
 #### RPI on Robot
 ##### Publish topics to server (for raw image data):
 vfarm/tier01_tray01, 
@@ -31,7 +49,7 @@ Realtime logging of date, time, exact rack and column of the harvest is done wit
 ### Passwords
 mqtt server : username : pgharvest
               password : 1234
-homeassistant(ui) : username  : project green harvest
+homeassistant(UI) : username  : project green harvest
                     password : 12345
                    
 ## Actuation rig
@@ -46,31 +64,19 @@ rack : 10.12.213.188
 1. sudo /etc/init.d/mosquitto start stop
 
 ## run hass ui
+On Command Line Terminal of backend, run:
 1. cd homeassistant/
 2. source bin/activate
-3. hass
---edit 
-sudo leafpad /home/pi/.homeassistant/configuration.yaml
+3. hass 
+(to edit UI) sudo leafpad /home/pi/.homeassistant/configuration.yaml
 
 ## UI Link
 10.12.108.241:8123
 
 ### Currently running files
 ## Rack
- - Packages/ 
-  1. Classes.py
-  2. __init__.py
-  3. main.py
-  - Arduino
-   1. slider_arduino4.ino
+Under rackpackage, run RackMain.py
 ## Robot
-1. Robotcam.py
-2. receiver_arduino2.ino
-3. motor_linefollower.ino
-4. actuator.ino
-
+Under robotpackage, run RobotMain.py
 ## Backend
-1. fakebackend.py
-2. configuration.yaml
-3. groups.yaml
-4. backend.py
+Run backend.py 
