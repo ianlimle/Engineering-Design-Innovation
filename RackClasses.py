@@ -84,6 +84,7 @@ class MQTTClient():
                 feedback = ser.read(1)
                 print("waiting...")
                 print(feedback)
+            MQTTClient.client.publish("hass/%d"%(i), "ON", qos=0, retain=False)  
             
             #feedback_string = feedback.decode()
             #print(feedback_string)
@@ -93,10 +94,10 @@ class MQTTClient():
         print(inp)
         return inp, sendtray
     
-    client = mqtt.Client("rack_rpi", clean_session=True, userdata=None)
+    client = mqtt.Client("rack_rpi", clean_session=False, userdata=None)
 
     client.on_publish= on_publish
-    client.on-subscribe= on_subscribe
+    client.on_subscribe= on_subscribe
     client.on_message= on_message
     client.on_connect= on_connect
     client.on_disconnect= on_disconnect
